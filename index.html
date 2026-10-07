@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Calculadora de gastos simple con separación entre presentación y lógica de negocio."
+    />
+    <title>Mi Gasto | Calculadora de gastos</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+  <body>
+    <header class="encabezado">
+      <a class="marca" href="#" aria-label="Ir al inicio">
+        <span class="marca__icono" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img">
+            <path d="M7 7.5h10M7 11.5h6M8.5 3.5h7a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3h-7a3 3 0 0 1-3-3v-11a3 3 0 0 1 3-3Z" />
+            <path d="M15.5 15.5h.01" />
+          </svg>
+        </span>
+        <span>Mi Gasto</span>
+      </a>
+    </header>
+
+    <main class="contenedor">
+      <section class="bienvenida" aria-labelledby="titulo-principal">
+        <div>
+          <p class="eyebrow">Calculadora personal</p>
+          <h1 id="titulo-principal">Tus gastos, <span>bajo control.</span></h1>
+          <p class="bienvenida__texto">
+            Registra tus gastos diarios, revisa cuánto llevas acumulado y descubre
+            en qué categoría utilizas más dinero.
+          </p>
+        </div>
+      </section>
+
+      <section class="panel-principal">
+        <article class="tarjeta formulario-tarjeta">
+          <div class="tarjeta__encabezado">
+            <div>
+              <p class="numero-seccion">01</p>
+              <h2>Registrar gasto</h2>
+            </div>
+          </div>
+
+          <form id="formulario-gasto" novalidate>
+            <div class="campo">
+              <label for="descripcion">Descripción</label>
+              <input
+                id="descripcion"
+                name="descripcion"
+                type="text"
+                maxlength="40"
+                placeholder="Ej. Almuerzo"
+                autocomplete="off"
+                required
+              />
+              <p class="campo__error" id="error-descripcion"></p>
+            </div>
+
+            <div class="formulario-fila">
+              <div class="campo">
+                <label for="categoria">Categoría</label>
+                <select id="categoria" name="categoria" required>
+                  <option value="Alimentación">Alimentación</option>
+                  <option value="Transporte">Transporte</option>
+                  <option value="Estudios">Estudios</option>
+                  <option value="Servicios">Servicios</option>
+                  <option value="Entretenimiento">Entretenimiento</option>
+                  <option value="Otros">Otros</option>
+                </select>
+              </div>
+
+              <div class="campo">
+                <label for="monto">Monto (S/)</label>
+                <div class="campo-monto">
+                  <span>S/</span>
+                  <input
+                    id="monto"
+                    name="monto"
+                    type="number"
+                    min="0.01"
+                    step="0.01"
+                    placeholder="0.00"
+                    inputmode="decimal"
+                    required
+                  />
+                </div>
+                <p class="campo__error" id="error-monto"></p>
+              </div>
+            </div>
+
+            <button class="boton boton--primario" id="boton-registrar" type="submit">
+              <span>Registrar gasto</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </button>
+          </form>
+        </article>
+
+        <article class="tarjeta resumen-tarjeta">
+          <div class="tarjeta__encabezado">
+            <div>
+              <p class="numero-seccion">02</p>
+              <h2>Resumen</h2>
+            </div>
+          </div>
+
+          <p class="resumen__leyenda">TOTAL REGISTRADO</p>
+          <p class="resumen__total" id="total-gastos">S/ 0.00</p>
+          <div class="resumen__divisor"></div>
+
+          <dl class="metricas">
+            <div>
+              <dt>N.º de gastos</dt>
+              <dd id="cantidad-gastos">0</dd>
+            </div>
+            <div>
+              <dt>Promedio</dt>
+              <dd id="promedio-gastos">S/ 0.00</dd>
+            </div>
+            <div>
+              <dt>Categoría principal</dt>
+              <dd id="categoria-principal">—</dd>
+            </div>
+          </dl>
+        </article>
+      </section>
+
+      <section class="tarjeta historial" aria-labelledby="titulo-historial">
+        <div class="tarjeta__encabezado">
+          <div>
+            <p class="numero-seccion">03</p>
+            <h2 id="titulo-historial">Gastos registrados</h2>
+          </div>
+          <button class="boton-texto" id="boton-limpiar" type="button">Limpiar todo</button>
+        </div>
+
+        <div class="estado-vacio" id="estado-vacio">
+          <span class="estado-vacio__icono" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 7.5h16M7 4.5h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2Z" />
+              <path d="M8 12h3M8 16h6" />
+            </svg>
+          </span>
+          <h3>Aún no hay gastos</h3>
+          <p>Tu primer registro aparecerá aquí.</p>
+        </div>
+
+        <ul class="lista-gastos" id="lista-gastos" aria-live="polite"></ul>
+      </section>
+    </main>
+
+    <div class="notificacion" id="notificacion" role="status" aria-live="polite"></div>
+
+    <script src="js/logica-gastos.js"></script>
+    <script src="js/presentacion.js"></script>
+  </body>
+</html>
