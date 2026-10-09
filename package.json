@@ -1,0 +1,9 @@
+{
+  "name": "calculadora-gastos-dos-capas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Calculadora de gastos simple con capa de presentación y capa de lógica.",
+  "scripts": {
+    "test": "node --test"
+  }
+}
